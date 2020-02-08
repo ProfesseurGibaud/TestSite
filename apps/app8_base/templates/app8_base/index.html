@@ -1,0 +1,59 @@
+{% extends "app8_base/base.html" %}
+
+{% comment %}
+    This is the template we are going to use for the index page for
+    the next apps. It expects variables from the view such as :
+    - title
+    - header (optional)
+    - footer (optional)
+    - views
+
+    'views' should contain a list of tuples with view names and titles to
+    display.
+
+    This displays the very same index page we have seen in the previous apps:
+    a listing of links to examples.
+{% endcomment %}
+
+
+{% block title %}
+{{ title }}
+{% endblock title %}
+
+
+{% block header %}
+<header class="page-header">
+    <p><a href="/">Home</a></p>
+
+    {# 'safe' will prevent automatic HTML escaping #}
+    <h1>{{ title|safe }}</h1>
+</header>
+
+
+
+{% if header %}
+    <p>{{ header|safe }}</p>
+{% endif %}
+
+{% endblock %}
+
+{% comment %}
+    We use a 'for' tag to iterate over the examples and display a listing
+    of links.
+{% endcomment %}
+{% block content %}
+<ul>
+    {% for view_name, view_title in examples %}
+        <li><a href="{% url view_name  %}">{{ view_title }}</a></li>
+    {% endfor %}
+</ul>
+{% endblock %}
+
+
+{% block footer %}
+
+{% if footer %}
+    <p>{{ footer|safe }}</p>
+{% endif %}
+
+{% endblock %}

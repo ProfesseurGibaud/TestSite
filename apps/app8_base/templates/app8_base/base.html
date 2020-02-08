@@ -1,0 +1,57 @@
+{% comment %}
+    This is the base template we are going to reuse from now for next apps.
+    It features the most useful blocks, and a default CSS style.
+{% endcomment %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>
+        {# The template child must be able to override the title #}
+        {% block title %}
+            Django, an app at a time
+        {% endblock %}
+    </title>
+    {# It's possible to completly override the CSS from the child template #}
+    {% block style %}
+        {% comment %}
+            The default CSS will be using the bootstrap CSS framework.
+            This will save a lot of work for us and still gives us a nice
+            looking style.
+        {% endcomment %}
+        {% load static %}
+        <link rel="stylesheet" href="{% static 'app8_base/css/bootstrap.min.css' %}">
+        <link rel="stylesheet" href="{% static 'app8_base/css/style.css' %}">
+    {% endblock %}
+
+    {# A block for additional tags in HEAD such as more CSS #}
+    {% block head %}
+    {% endblock %}
+
+</head>
+
+{# Allow the child to add a class to the whole HTML #}
+<body class="{% block pageclass %}{% endblock %}">
+<div class="container">
+
+{# A block to add an optional header #}
+{% block header %}
+{% endblock %}
+
+{# Here always goes the main content  #}
+{% block content %}
+{% endblock %}
+
+{# A block for an optional footer #}
+{% block footer %}
+{% endblock %}
+
+</div>
+</body>
+
+{# A child can add here utility tags such as more javascript #}
+{% block bottom %}
+{% endblock %}
+
+</html>
+
